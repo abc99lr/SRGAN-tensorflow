@@ -9,8 +9,8 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --flip True \
     --random_crop True \
     --crop_size 24 \
-    --input_dir_LR /home/ruilan2/scratch/srganData/ \
-    --input_dir_HR /home/ruilan2/scratch/srganData/ \
+    --input_dir_LR /home/ruilan2/scratch/srganData/RAISE_LR/ \
+    --input_dir_HR /home/ruilan2/scratch/srganData/RAISE_HR/ \
     --num_resblock 16 \
     --name_queue_capacity 4096 \
     --image_queue_capacity 4096 \
