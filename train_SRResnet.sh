@@ -22,6 +22,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --decay_rate 0.1 \
     --stair False \
     --beta 0.9 \
-    --max_iter 100000 \
+    --max_iter 1000000 \
     --save_freq 20000
 
