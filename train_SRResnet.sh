@@ -9,7 +9,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --flip True \
     --random_crop True \
     --crop_size 24 \
-    # change directory to CC's version 
     --input_dir_LR /home/ruilan2/scratch/srganData/ \
     --input_dir_HR /home/ruilan2/scratch/srganData/ \
     --num_resblock 16 \
@@ -23,7 +22,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --decay_rate 0.1 \
     --stair False \
     --beta 0.9 \
-    # train 100,000 first, the original code train 1000,000
     --max_iter 100000 \
     --save_freq 20000
 
