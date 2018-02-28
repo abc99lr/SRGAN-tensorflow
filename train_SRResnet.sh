@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir ./experiment_SRResnet/ \
-    --summary_dir ./experiment_SRResnet/log/ \
+    --output_dir /home/ruilan2/scratch/srganResult/experiment_SRResnet/ \
+    --summary_dir /home/ruilan2/scratch/srganResult/experiment_SRResnet/log/ \
     --mode train \
     --is_training True \
     --task SRResnet \

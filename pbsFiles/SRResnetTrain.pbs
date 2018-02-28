@@ -1,0 +1,11 @@
+#!/bin/bash 
+#
+#PBS -l walltime=10:00:00,node=1:ppn=16:TeslaK40M
+#PBS -N SRResnet
+#PBS -q ncsa 
+
+
+
+module load anaconda/2
+cd /home/ruilan2/SRGAN-tensorflow
+sh train_SRResnet.sh 
