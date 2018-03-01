@@ -25,5 +25,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --queue_thread 10 \
     --vgg_scaling 0.0061 \
     --pre_trained_model True \
+    --pre_trained_model_type SRResnet \
     --checkpoint /home/ruilan2/scratch/srganResult/experiment_SRResnet/model-1000000
 
