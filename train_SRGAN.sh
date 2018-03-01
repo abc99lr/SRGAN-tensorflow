@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir ./experiment_SRGAN_VGG54/ \
-    --summary_dir ./experiment_SRGAN_VGG54/log/ \
+    --output_dir /home/ruilan2/scratch/srganResult/experiment_SRGAN_VGG54/ \
+    --summary_dir /home/ruilan2/scratch/srganResult/experiment_SRGAN_VGG54/log/ \
     --mode train \
     --is_training True \
     --task SRGAN \
@@ -9,8 +9,8 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --flip True \
     --random_crop True \
     --crop_size 24 \
-    --input_dir_LR ./data/RAISE_LR/ \
-    --input_dir_HR ./data/RAISE_HR/ \
+    --input_dir_LR /home/ruilan2/scratch/srganData/RAISE_LR/ \
+    --input_dir_HR /home/ruilan2/scratch/srganData/RAISE_HR/ \
     --num_resblock 16 \
     --perceptual_mode VGG54 \
     --name_queue_capacity 4096 \
@@ -21,9 +21,9 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --decay_rate 0.1 \
     --stair True \
     --beta 0.9 \
-    --max_iter 200000 \
+    --max_iter 2000 \
     --queue_thread 10 \
     --vgg_scaling 0.0061 \
     --pre_trained_model True \
-    --checkpoint ./experiment_SRGAN_MSE/model-500000
+    --checkpoint /home/ruilan2/scratch/srganResult/experiment_SRResnet/model-1000000
 

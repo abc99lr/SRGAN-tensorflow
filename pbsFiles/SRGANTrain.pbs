@@ -1,0 +1,6 @@
+#!/bin/bash 
+#
+#PBS -l walltime=22:00:00,nodes=1:ppn=16:TeslaK40M
+#PBS -N SRResnet
+#PBS -q ncsa 
+
