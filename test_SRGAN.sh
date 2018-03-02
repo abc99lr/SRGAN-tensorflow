@@ -11,5 +11,5 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --num_resblock 16 \
     --perceptual_mode VGG54 \
     --pre_trained_model True \
-    --checkpoint /home/ruilan2/scrach/srganResult/experiment_SRGAN_VGG54/model-80000
+    --checkpoint /home/ruilan2/scratch/srganResult/experiment_SRGAN_VGG54/model-80000
 
