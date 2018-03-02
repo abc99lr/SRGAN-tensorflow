@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir ./result/ \
-    --summary_dir ./result/log/ \
+    --output_dir ./result/srgan-vgg54-80000/ \
+    --summary_dir ./result/srgan-vgg54-80000/log/ \
     --mode test \
     --is_training False \
     --task SRGAN \
@@ -11,5 +11,5 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --num_resblock 16 \
     --perceptual_mode VGG54 \
     --pre_trained_model True \
-    --checkpoint ./SRGAN_pre-trained/model-200000
+    --checkpoint /home/ruilan2/scrach/srganResult/experiment_SRGAN_VGG54/model-80000
 
