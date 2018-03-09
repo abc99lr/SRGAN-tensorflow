@@ -291,6 +291,7 @@ def discriminator(dis_inputs, FLAGS=None):
             # The input layer
             with tf.variable_scope('input_stage'):
                 net = conv2(dis_inputs, 3, 64, 1, scope='conv')
+                print(net.shape)
                 net = lrelu(net, 0.2)
 
             # The discriminator block part
