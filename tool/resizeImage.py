@@ -3,8 +3,8 @@ import os
 from multiprocessing import Pool
 
 # Define the input and output image
-input_dir = '../data/RAISE_HR/'
-output_dir = '../data/RAISE_LR/'
+input_dir = '/home/ruilan2/scratch/MPR0/MPR0_HR_train'
+output_dir = '/home/ruilan2/scratch/MPR0/MPR0_LR_train'
 scale = 4.
 
 if not os.path.exists(output_dir):

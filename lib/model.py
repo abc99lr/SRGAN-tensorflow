@@ -53,7 +53,8 @@ def data_loader(FLAGS):
             input_image_LR = tf.image.convert_image_dtype(input_image_LR, dtype=tf.float32)
             input_image_HR = tf.image.convert_image_dtype(input_image_HR, dtype=tf.float32)
 
-            assertion = tf.assert_equal(tf.shape(input_image_LR)[2], 3, message="image does not have 3 channels")
+            # assertion = tf.assert_equal(tf.shape(input_image_LR)[2], 3, message="image does not have 3 channels")
+            assertion = tf.assert_equal(tf.shape(input_image_LR)[2], 1, message="image does not have 1 channel")
             with tf.control_dependencies([assertion]):
                 input_image_LR = tf.identity(input_image_LR)
                 input_image_HR = tf.identity(input_image_HR)
