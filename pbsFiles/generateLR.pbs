@@ -1,0 +1,9 @@
+#!/bin/bash 
+#
+#PBS -l walltime=00:30:00,nodes=1:ppn=12
+#PBS -N generateLR
+#PBS -q ncsa 
+
+module load anaconda/2
+cd /home/ruilan2/SRGAN-tensorflow/tool
+python resizeImage.py
