@@ -1,6 +1,6 @@
 #!/bin/bash 
 #
-#PBS -l walltime=00:30:00,nodes=1:ppn=12
+#PBS -l walltime=00:05:00,nodes=1:ppn=12
 #PBS -N generateLR
 #PBS -q ncsa 
 
