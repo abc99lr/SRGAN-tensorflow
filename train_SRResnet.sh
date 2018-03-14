@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir /home/ruilan2/scratch/srganResult/experiment_SRResnet/ \
-    --summary_dir /home/ruilan2/scratch/srganResult/experiment_SRResnet/log/ \
+    --output_dir /home/ruilan2/scratch/MPR0Result/experiment_SRResnet/ \
+    --summary_dir /home/ruilan2/scratch/MPR0Result/experiment_SRResnet/log/ \
     --mode train \
     --is_training True \
     --task SRResnet \
-    --batch_size 2 \
-    --flip True \
+    --batch_size 16 \
+    --flip False \
     --random_crop True \
     --crop_size 24 \
-    --input_dir_LR /home/ruilan2/scratch/srganData/RAISE_LR/ \
-    --input_dir_HR /home/ruilan2/scratch/srganData/RAISE_HR/ \
+    --input_dir_LR /home/ruilan2/scratch/MPR0/MPR0_LR_train/ \
+    --input_dir_HR /home/ruilan2/scratch/MPR0/MPR0_HR_train/ \
     --num_resblock 16 \
     --name_queue_capacity 4096 \
     --image_queue_capacity 4096 \

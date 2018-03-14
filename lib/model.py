@@ -48,8 +48,8 @@ def data_loader(FLAGS):
             reader = tf.WholeFileReader(name='image_reader')
             image_LR = tf.read_file(output[0])
             image_HR = tf.read_file(output[1])
-            input_image_LR = tf.image.decode_png(image_LR, channels=3)
-            input_image_HR = tf.image.decode_png(image_HR, channels=3)
+            input_image_LR = tf.image.decode_png(image_LR, channels=1)
+            input_image_HR = tf.image.decode_png(image_HR, channels=1)
             input_image_LR = tf.image.convert_image_dtype(input_image_LR, dtype=tf.float32)
             input_image_HR = tf.image.convert_image_dtype(input_image_HR, dtype=tf.float32)
 
@@ -108,11 +108,11 @@ def data_loader(FLAGS):
                     target_images = tf.identity(targets)
 
             if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
-                input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 3])
-                target_images.set_shape([FLAGS.crop_size*4, FLAGS.crop_size*4, 3])
+                input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
+                target_images.set_shape([FLAGS.crop_size*4, FLAGS.crop_size*4, 1])
             elif FLAGS.task == 'denoise':
-                input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 3])
-                target_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 3])
+                input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
+                target_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
 
         if FLAGS.mode == 'train':
             paths_LR_batch, paths_HR_batch, inputs_batch, targets_batch = tf.train.shuffle_batch([output[0], output[1], input_images, target_images],
@@ -124,11 +124,11 @@ def data_loader(FLAGS):
 
         steps_per_epoch = int(math.ceil(len(image_list_LR) / FLAGS.batch_size))
         if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
-            inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 3])
-            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size*4, FLAGS.crop_size*4, 3])
+            inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
+            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size*4, FLAGS.crop_size*4, 1])
         elif FLAGS.task == 'denoise':
-            inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 3])
-            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 3])
+            inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
+            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
     return Data(
         paths_LR=paths_LR_batch,
         paths_HR=paths_HR_batch,
@@ -462,7 +462,7 @@ def SRResnet(inputs, targets, FLAGS):
     with tf.variable_scope('generator'):
         output_channel = targets.get_shape().as_list()[-1]
         gen_output = generator(inputs, output_channel, reuse=False, FLAGS=FLAGS)
-        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size * 4, FLAGS.crop_size * 4, 3])
+        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size * 4, FLAGS.crop_size * 4, 1])
 
     # Use the VGG54 feature
     if FLAGS.perceptual_mode == 'VGG54':
