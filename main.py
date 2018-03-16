@@ -90,14 +90,14 @@ if FLAGS.mode == 'test':
     # Declare the test data reader
     test_data = test_data_loader(FLAGS)
 
-    inputs_raw = tf.placeholder(tf.float32, shape=[1, None, None, 3], name='inputs_raw')
-    targets_raw = tf.placeholder(tf.float32, shape=[1, None, None, 3], name='targets_raw')
+    inputs_raw = tf.placeholder(tf.float32, shape=[1, None, None, 1], name='inputs_raw')
+    targets_raw = tf.placeholder(tf.float32, shape=[1, None, None, 1], name='targets_raw')
     path_LR = tf.placeholder(tf.string, shape=[], name='path_LR')
     path_HR = tf.placeholder(tf.string, shape=[], name='path_HR')
 
     with tf.variable_scope('generator'):
         if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
-            gen_output = generator(inputs_raw, 3, reuse=False, FLAGS=FLAGS)
+            gen_output = generator(inputs_raw, 1, reuse=False, FLAGS=FLAGS)
         else:
             raise NotImplementedError('Unknown task!!')
 
