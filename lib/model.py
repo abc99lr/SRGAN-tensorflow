@@ -164,11 +164,12 @@ def test_data_loader(FLAGS):
         if mode == 'LR':
             im = im / np.max(im)
             im = np.reshape(im, (im.shape[0], im.shape[1], 1))
-            print(im.shape)
+
         elif mode == 'HR':
             im = im / np.max(im)
             im = im * 2 - 1
-
+            im = np.reshape(im, (im.shape[0], im.shape[1], 1))
+            
         return im
 
     image_LR = [preprocess_test(_, 'LR') for _ in image_list_LR]
