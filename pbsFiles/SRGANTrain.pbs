@@ -1,8 +1,8 @@
 #!/bin/bash 
 #
-#PBS -l walltime=00:29:00,nodes=1:ppn=16:TeslaK40M
+#PBS -l walltime=01:00:00,nodes=1:ppn=16:TeslaK40M
 #PBS -N SRGAN
-#PBS -q test 
+#PBS -q ncsa 
 
 module load anaconda/2
 cd /home/ruilan2/SRGAN-tensorflow
