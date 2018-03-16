@@ -169,7 +169,7 @@ def test_data_loader(FLAGS):
             im = im / np.max(im)
             im = im * 2 - 1
             im = np.reshape(im, (im.shape[0], im.shape[1], 1))
-            
+
         return im
 
     image_LR = [preprocess_test(_, 'LR') for _ in image_list_LR]
@@ -358,7 +358,7 @@ def SRGAN(inputs, targets, FLAGS):
     with tf.variable_scope('generator'):
         output_channel = targets.get_shape().as_list()[-1]
         gen_output = generator(inputs, output_channel, reuse=False, FLAGS=FLAGS)
-        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size*4, FLAGS.crop_size*4, 3])
+        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size*4, FLAGS.crop_size*4, 1])
 
     # Build the fake discriminator
     with tf.name_scope('fake_discriminator'):
