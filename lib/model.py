@@ -163,6 +163,7 @@ def test_data_loader(FLAGS):
         #     im = temp.copy()
         if mode == 'LR':
             im = im / np.max(im)
+            print(im.shape)
         elif mode == 'HR':
             im = im / np.max(im)
             im = im * 2 - 1
