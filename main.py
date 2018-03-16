@@ -90,8 +90,8 @@ if FLAGS.mode == 'test':
     # Declare the test data reader
     test_data = test_data_loader(FLAGS)
 
-    inputs_raw = tf.placeholder(tf.float32, shape=[1, None, None, 1], name='inputs_raw')
-    targets_raw = tf.placeholder(tf.float32, shape=[1, None, None, 1], name='targets_raw')
+    inputs_raw = tf.placeholder(tf.float32, shape=[1, None, None], name='inputs_raw')
+    targets_raw = tf.placeholder(tf.float32, shape=[1, None, None], name='targets_raw')
     path_LR = tf.placeholder(tf.string, shape=[], name='path_LR')
     path_HR = tf.placeholder(tf.string, shape=[], name='path_HR')
 
