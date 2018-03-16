@@ -163,7 +163,7 @@ def test_data_loader(FLAGS):
         #     im = temp.copy()
         if mode == 'LR':
             im = im / np.max(im)
-            np.reshape(im, (im.shape[0], im.shape[1], 1))
+            im = np.reshape(im, (im.shape[0], im.shape[1], 1))
             print(im.shape)
         elif mode == 'HR':
             im = im / np.max(im)
