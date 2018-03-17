@@ -208,7 +208,8 @@ def inference_data_loader(FLAGS):
         #     temp[:, :, :] = im[:, :, np.newaxis]
         #     im = temp.copy()
         im = im / np.max(im)
-
+        im = np.reshape(im, (im.shape[0], im.shape[1], 1))
+        
         return im
 
     image_LR = [preprocess_test(_) for _ in image_list_LR]

@@ -167,7 +167,7 @@ elif FLAGS.mode == 'inference':
     # Declare the test data reader
     inference_data = inference_data_loader(FLAGS)
 
-    inputs_raw = tf.placeholder(tf.float32, shape=[1, None, None, 3], name='inputs_raw')
+    inputs_raw = tf.placeholder(tf.float32, shape=[1, None, None, 1], name='inputs_raw')
     path_LR = tf.placeholder(tf.string, shape=[], name='path_LR')
 
     with tf.variable_scope('generator'):
