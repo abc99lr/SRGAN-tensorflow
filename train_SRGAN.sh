@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE/ \
-    --summary_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE/log/ \
+    --output_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE_1/ \
+    --summary_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE_1/log/ \
     --mode train \
     --is_training True \
     --task SRGAN \
@@ -25,6 +25,6 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --queue_thread 10 \
     --vgg_scaling 0.0061 \
     --pre_trained_model True \
-    --pre_trained_model_type SRResnet \
-    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRResnet/model-80000
+    --pre_trained_model_type SRGAN \
+    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE/model-100000
 
