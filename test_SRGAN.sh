@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir /home/ruilan2/scratch/MPR0Result/test_SRGAN_100000/ \
-    --summary_dir /home/ruilan2/scratch/MPR0Result/test_SRGAN_100000/log/ \
+    --output_dir /home/ruilan2/scratch/MPR0Result/test_SRGAN_200000/ \
+    --summary_dir /home/ruilan2/scratch/MPR0Result/test_SRGAN_200000/log/ \
     --mode test \
     --is_training False \
     --task SRGAN \
@@ -11,5 +11,5 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --num_resblock 16 \
     --perceptual_mode MSE \
     --pre_trained_model True \
-    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE/model-100000
+    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_MSE_1/model-100000
 
