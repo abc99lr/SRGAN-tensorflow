@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir /home/ruilan2/scratch/MPR0Result/test_SRGAN_200000/ \
-    --summary_dir /home/ruilan2/scratch/MPR0Result/test_SRGAN_200000/log/ \
+    --output_dir /home/ruilan2/scratch/MPR0Result/test_new_data/ \
+    --summary_dir /home/ruilan2/scratch/MPR0Result/test_new_data/log/ \
     --mode test \
     --is_training False \
     --task SRGAN \

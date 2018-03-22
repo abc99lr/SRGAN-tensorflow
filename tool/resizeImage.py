@@ -3,9 +3,9 @@ import os
 from multiprocessing import Pool
 
 # Define the input and output image
-input_dir = '/home/ruilan2/scratch/MPR0/MPR0_HR_test'
-output_dir = '/home/ruilan2/scratch/MPR0/MPR0_LR_test'
-scale = 4.
+input_dir = '../low_low_resolution'
+output_dir = '../low_low_resolution_out'
+scale = 2.
 
 if not os.path.exists(output_dir):
     os.mkdir(output_dir)
@@ -18,12 +18,15 @@ def downscale(name):
     print(name)
     with Image.open(name) as im:
         w, h = im.size
+        print(im.size)
         w_new = int(w / scale)
-        h_new = int(h / scale)
-        im_new = im.resize((w_new, h_new), Image.ANTIALIAS)
-
+        # h_new = int(h / scale)
+        im_new = im.resize((w_new, h), Image.ANTIALIAS)
+        print(im_new.size)
+        im_new_new = im_new.resize((w, h), Image.ANTIALIAS)
+        print(im_new_new.size)
         save_name = os.path.join(output_dir, name.split('/')[-1])
-        im_new.save(save_name)
+        im_new_new.save(save_name)
 
 p = Pool(5)
 p.map(downscale, image_list)
