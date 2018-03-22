@@ -2,8 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-input_dir = '../result/test_SRGAN_200000/images/'
-img_idx = '128329180'
+input_dir = '../result/test_new_data/images/'
+img_idx = '100408210'
 
 full_name = input_dir + img_idx
 
