@@ -3,8 +3,8 @@ import os
 from multiprocessing import Pool
 
 # Define the input and output image
-input_dir = '/home/ruilan2/scratch/MPR0/MPR0_HR_train/'
-output_dir = '/home/ruilan2/scratch/MPR0/MPR0_LR_train_scale4/'
+input_dir = '/home/ruilan2/scratch/MPR0/MPR0_HR_test/'
+output_dir = '/home/ruilan2/scratch/MPR0/MPR0_LR_test_scale4/'
 
 scale = 2.0
 
