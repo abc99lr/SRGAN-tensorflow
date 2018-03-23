@@ -11,5 +11,5 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --num_resblock 16 \
     --perceptual_mode MSE \
     --pre_trained_model True \
-    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_scale4/model-200000/
+    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_scale4/model-200000
 
