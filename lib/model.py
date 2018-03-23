@@ -125,7 +125,7 @@ def data_loader(FLAGS):
         steps_per_epoch = int(math.ceil(len(image_list_LR) / FLAGS.batch_size))
         if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
             inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
-            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size*4, FLAGS.crop_size*4, 1])
+            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size*2, FLAGS.crop_size*2, 1])
         elif FLAGS.task == 'denoise':
             inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
             targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
