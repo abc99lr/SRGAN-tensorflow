@@ -82,8 +82,8 @@ def data_loader(FLAGS):
                     if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
                         inputs = tf.image.crop_to_bounding_box(inputs, offset_h, offset_w, FLAGS.crop_size,
                                                                FLAGS.crop_size)
-                        targets = tf.image.crop_to_bounding_box(targets, offset_h*4, offset_w*4, FLAGS.crop_size*4,
-                                                                FLAGS.crop_size*4)
+                        targets = tf.image.crop_to_bounding_box(targets, offset_h*2, offset_w*2, FLAGS.crop_size*2,
+                                                                FLAGS.crop_size*2)
                     elif FLAGS.task == 'denoise':
                         inputs = tf.image.crop_to_bounding_box(inputs, offset_h, offset_w, FLAGS.crop_size,
                                                                FLAGS.crop_size)
@@ -109,7 +109,7 @@ def data_loader(FLAGS):
 
             if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
                 input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
-                target_images.set_shape([FLAGS.crop_size*4, FLAGS.crop_size*4, 1])
+                target_images.set_shape([FLAGS.crop_size*2, FLAGS.crop_size*2, 1])
             elif FLAGS.task == 'denoise':
                 input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
                 target_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
@@ -359,7 +359,7 @@ def SRGAN(inputs, targets, FLAGS):
     with tf.variable_scope('generator'):
         output_channel = targets.get_shape().as_list()[-1]
         gen_output = generator(inputs, output_channel, reuse=False, FLAGS=FLAGS)
-        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size*4, FLAGS.crop_size*4, 1])
+        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size*2, FLAGS.crop_size*2, 1])
 
     # Build the fake discriminator
     with tf.name_scope('fake_discriminator'):
@@ -466,7 +466,7 @@ def SRResnet(inputs, targets, FLAGS):
     with tf.variable_scope('generator'):
         output_channel = targets.get_shape().as_list()[-1]
         gen_output = generator(inputs, output_channel, reuse=False, FLAGS=FLAGS)
-        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size * 4, FLAGS.crop_size * 4, 1])
+        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size * 2, FLAGS.crop_size * 2, 1])
 
     # Use the VGG54 feature
     if FLAGS.perceptual_mode == 'VGG54':
