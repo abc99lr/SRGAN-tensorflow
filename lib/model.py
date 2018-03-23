@@ -116,7 +116,7 @@ def data_loader(FLAGS):
 
         if FLAGS.mode == 'train':
             paths_LR_batch, paths_HR_batch, inputs_batch, targets_batch = tf.train.shuffle_batch([output[0], output[1], input_images, target_images],
-                                            batch_size=FLAGS.batch_size, capacity=FLAGS.image_queue_capacity+4*FLAGS.batch_size,
+                                            batch_size=FLAGS.batch_size, capacity=FLAGS.image_queue_capacity+2*FLAGS.batch_size,
                                             min_after_dequeue=FLAGS.image_queue_capacity, num_threads=FLAGS.queue_thread)
         else:
             paths_LR_batch, paths_HR_batch, inputs_batch, targets_batch = tf.train.batch([output[0], output[1], input_images, target_images],
