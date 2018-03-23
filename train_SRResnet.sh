@@ -9,7 +9,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --flip False \
     --random_crop True \
     --crop_size 24 \
-    --input_dir_LR /home/ruilan2/scratch/MPR0/MPR0_LR_train/ \
+    --input_dir_LR /home/ruilan2/scratch/MPR0/MPR0_LR_train_scale4/ \
     --input_dir_HR /home/ruilan2/scratch/MPR0/MPR0_HR_train/ \
     --num_resblock 16 \
     --name_queue_capacity 4096 \
