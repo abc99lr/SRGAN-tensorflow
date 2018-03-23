@@ -21,7 +21,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --decay_rate 0.1 \
     --stair True \
     --beta 0.9 \
-    --max_iter 100000 \
+    --max_iter 200000 \
     --queue_thread 10 \
     --vgg_scaling 0.0061 \
     --pre_trained_model False
