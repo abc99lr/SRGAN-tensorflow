@@ -265,12 +265,12 @@ def generator(gen_inputs, gen_output_channels, reuse=False, FLAGS=None):
             net = conv2(net, 3, 256, 1, scope='conv')
             net = pixelShuffler(net, scale=2)
             net = prelu_tf(net)
-            net = tf.layers.max_pooling2d(inputs=net, pool_size=[2, 2], strides=2)
+            #net = tf.layers.max_pooling2d(inputs=net, pool_size=[2, 2], strides=2)
 
 
         with tf.variable_scope('subpixelconv_stage2'):
             net = conv2(net, 3, 256, 1, scope='conv')
-            net = pixelShuffler(net, scale=2)
+            # net = pixelShuffler(net, scale=2)
             net = prelu_tf(net)
             # net = tf.layers.max_pooling2d(inputs=net, pool_size=[2, 2], strides=2)
 
