@@ -170,7 +170,7 @@ def test_data_loader(FLAGS):
 
             # Not sure what does this mean. 
             # im = im * 2 - 1
-            
+
             im = np.reshape(im, (im.shape[0], im.shape[1], 1))
 
         return im
@@ -365,7 +365,7 @@ def SRGAN(inputs, targets, FLAGS):
     with tf.variable_scope('generator'):
         output_channel = targets.get_shape().as_list()[-1]
         gen_output = generator(inputs, output_channel, reuse=False, FLAGS=FLAGS)
-        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size*2, FLAGS.crop_size*2, 1])
+        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
 
     # Build the fake discriminator
     with tf.name_scope('fake_discriminator'):
@@ -472,7 +472,7 @@ def SRResnet(inputs, targets, FLAGS):
     with tf.variable_scope('generator'):
         output_channel = targets.get_shape().as_list()[-1]
         gen_output = generator(inputs, output_channel, reuse=False, FLAGS=FLAGS)
-        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size * 2, FLAGS.crop_size * 2, 1])
+        gen_output.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
 
     # Use the VGG54 feature
     if FLAGS.perceptual_mode == 'VGG54':
