@@ -82,8 +82,8 @@ def data_loader(FLAGS):
                     if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
                         inputs = tf.image.crop_to_bounding_box(inputs, offset_h, offset_w, FLAGS.crop_size,
                                                                FLAGS.crop_size)
-                        targets = tf.image.crop_to_bounding_box(targets, offset_h*2, offset_w*2, FLAGS.crop_size*2,
-                                                                FLAGS.crop_size*2)
+                        targets = tf.image.crop_to_bounding_box(targets, offset_h, offset_w, FLAGS.crop_size,
+                                                                FLAGS.crop_size)
                     elif FLAGS.task == 'denoise':
                         inputs = tf.image.crop_to_bounding_box(inputs, offset_h, offset_w, FLAGS.crop_size,
                                                                FLAGS.crop_size)
@@ -109,7 +109,7 @@ def data_loader(FLAGS):
 
             if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
                 input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
-                target_images.set_shape([FLAGS.crop_size*2, FLAGS.crop_size*2, 1])
+                target_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
             elif FLAGS.task == 'denoise':
                 input_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
                 target_images.set_shape([FLAGS.crop_size, FLAGS.crop_size, 1])
@@ -125,7 +125,7 @@ def data_loader(FLAGS):
         steps_per_epoch = int(math.ceil(len(image_list_LR) / FLAGS.batch_size))
         if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
             inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
-            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size*2, FLAGS.crop_size*2, 1])
+            targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
         elif FLAGS.task == 'denoise':
             inputs_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
             targets_batch.set_shape([FLAGS.batch_size, FLAGS.crop_size, FLAGS.crop_size, 1])
@@ -167,7 +167,10 @@ def test_data_loader(FLAGS):
 
         elif mode == 'HR':
             im = im / np.max(im)
-            im = im * 2 - 1
+
+            # Not sure what does this mean. 
+            # im = im * 2 - 1
+            
             im = np.reshape(im, (im.shape[0], im.shape[1], 1))
 
         return im
@@ -263,7 +266,7 @@ def generator(gen_inputs, gen_output_channels, reuse=False, FLAGS=None):
 
         with tf.variable_scope('subpixelconv_stage1'):
             net = conv2(net, 3, 256, 1, scope='conv')
-            net = pixelShuffler(net, scale=2)
+            # net = pixelShuffler(net, scale=2)
             net = prelu_tf(net)
             #net = tf.layers.max_pooling2d(inputs=net, pool_size=[2, 2], strides=2)
 
