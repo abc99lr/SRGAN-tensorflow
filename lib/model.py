@@ -168,8 +168,7 @@ def test_data_loader(FLAGS):
         elif mode == 'HR':
             im = im / np.max(im)
 
-            # Not sure what does this mean. 
-            # im = im * 2 - 1
+            im = im * 2 - 1
 
             im = np.reshape(im, (im.shape[0], im.shape[1], 1))
 
