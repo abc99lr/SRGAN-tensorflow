@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc/ \
-    --summary_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc/log/ \
+    --output_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc_1/ \
+    --summary_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc_1/log/ \
     --mode train \
     --is_training True \
     --task SRGAN \
@@ -24,5 +24,5 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
     --max_iter 200000 \
     --queue_thread 10 \
     --vgg_scaling 0.0061 \
-    --pre_trained_model False
-
+    --pre_trained_model True \
+    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc/model-200000
