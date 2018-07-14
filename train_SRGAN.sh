@@ -1,28 +1,29 @@
 #!/usr/bin/env bash
 CUDA_VISIBLE_DEVICES=0 python main.py \
-    --output_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc_1/ \
-    --summary_dir /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc_1/log/ \
+    --output_dir /home/tianxiaozhang/Super-resolution-program/SuperResolution/SRGAN-tensorflow/out \
+    --summary_dir /home/tianxiaozhang/Super-resolution-program/SuperResolution/SRGAN-tensorflow/out/log \
     --mode train \
     --is_training True \
     --task SRGAN \
     --batch_size 16 \
     --flip False \
-    --random_crop True \
+    --random_crop False \
     --crop_size 24 \
-    --input_dir_LR /home/ruilan2/scratch/MPR0/MPR0_LR_train_ktrunc/ \
-    --input_dir_HR /home/ruilan2/scratch/MPR0/MPR0_HR_train/ \
+    --input_dir_LR /home/tianxiaozhang/Super-resolution-program/SuperResolution/SRGAN-tensorflow/test_l \
+    --input_dir_HR /home/tianxiaozhang/Super-resolution-program/SuperResolution/SRGAN-tensorflow/test_h \
     --num_resblock 16 \
     --perceptual_mode MSE \
     --name_queue_capacity 4096 \
     --image_queue_capacity 4096 \
     --ratio 0.001 \
-    --learning_rate 0.0001 \
-    --decay_step 100000 \
-    --decay_rate 0.1 \
+    --learning_rate 0.00001 \
+    --decay_step 1000 \
+    --decay_rate 0.9 \
     --stair True \
     --beta 0.9 \
     --max_iter 200000 \
     --queue_thread 10 \
     --vgg_scaling 0.0061 \
-    --pre_trained_model True \
-    --checkpoint /home/ruilan2/scratch/MPR0Result/experiment_SRGAN_ktrunc/model-200000
+    --pre_trained_model False \
+    --pre_trained_model_type SRGAN \
+    --checkpoint /home/tianxiaozhang/Super-resolution-program/SuperResolution/SRGAN-tensorflow/out/model-5000 

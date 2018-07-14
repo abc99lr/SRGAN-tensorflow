@@ -1,7 +1,8 @@
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
-
+import os
+os.environ['CUBA_VISIBLE_DEVICES']='0'
 import tensorflow as tf
 import tensorflow.contrib.slim as slim
 import os
@@ -10,6 +11,7 @@ from lib.ops import *
 import math
 import time
 import numpy as np
+import scipy.io as scio
 
 Flags = tf.app.flags
 
@@ -52,10 +54,10 @@ Flags.DEFINE_boolean('stair', False, 'Whether perform staircase decay. True => d
 Flags.DEFINE_float('beta', 0.9, 'The beta1 parameter for the Adam optimizer')
 Flags.DEFINE_integer('max_epoch', None, 'The max epoch for the training')
 Flags.DEFINE_integer('max_iter', 1000000, 'The max iteration of the training')
-Flags.DEFINE_integer('display_freq', 20, 'The diplay frequency of the training process')
+Flags.DEFINE_integer('display_freq', 1, 'The diplay frequency of the training process')
 Flags.DEFINE_integer('summary_freq', 100, 'The frequency of writing summary')
-Flags.DEFINE_integer('save_freq', 10000, 'The frequency of saving images')
-
+Flags.DEFINE_integer('save_freq', 1000, 'The frequency of saving images')
+Flags.DEFINE_integer('save_freq_loss', 1000, 'The frequency of saving losses')
 
 FLAGS = Flags.FLAGS
 
@@ -172,7 +174,7 @@ elif FLAGS.mode == 'inference':
 
     with tf.variable_scope('generator'):
         if FLAGS.task == 'SRGAN' or FLAGS.task == 'SRResnet':
-            gen_output = generator(inputs_raw, 3, reuse=False, FLAGS=FLAGS)
+            gen_output = generator(inputs_raw, 1, reuse=False, FLAGS=FLAGS)
         else:
             raise NotImplementedError('Unknown task!!')
 
@@ -332,11 +334,19 @@ elif FLAGS.mode == 'train':
             max_iter = FLAGS.max_epoch * data.steps_per_epoch
 
         print('Optimization starts!!!')
+        train_loss_d = []
+        train_loss_a = []
+        train_loss_c = []
+        train_loss_g = []
+        
         start = time.time()
         for step in range(max_iter):
             fetches = {
                 "train": Net.train,
                 "global_step": sv.global_step,
+                "data_input":converted_inputs,
+                "data_output":converted_outputs,
+                "data_targets":converted_targets
             }
 
             if ((step+1) % FLAGS.display_freq) == 0:
@@ -368,6 +378,8 @@ elif FLAGS.mode == 'train':
                 rate = (step + 1) * FLAGS.batch_size / (time.time() - start)
                 remaining = (max_iter - step) * FLAGS.batch_size / rate
                 print("progress  epoch %d  step %d  image/sec %0.1f  remaining %dm" % (train_epoch, train_step, rate, remaining / 60))
+                
+                
                 if FLAGS.task == 'SRGAN':
                     print("global_step", results["global_step"])
                     print("PSNR", results["PSNR"])
@@ -375,11 +387,51 @@ elif FLAGS.mode == 'train':
                     print("adversarial_loss", results["adversarial_loss"])
                     print("content_loss", results["content_loss"])
                     print("learning_rate", results['learning_rate'])
+                    gen1_loss=results["content_loss"] + FLAGS.ratio*results["adversarial_loss"]
+                    print("generator_loss",gen1_loss)
+                    train_loss_d.append(results["discrim_loss"])
+                    train_loss_a.append(results["adversarial_loss"])
+                    train_loss_c.append(results["content_loss"])
+                    train_loss_g.append(gen1_loss)
+                    if ((step +1) % FLAGS.save_freq_loss) == 0:
+                        print("save_loss_image")
+                        out_in=results["data_input"]
+                        out_out=results["data_output"]
+                        out_tar=results["data_targets"]
+                        out_pathway="./out/"+str(step)+"_gan_out.mat"
+                        scio.savemat(out_pathway, {"final_in":out_in,"final_out":out_out,"final_tar":out_tar})
+                        train_loss1_d=np.array(train_loss_d)
+                        train_loss1_a=np.array(train_loss_a)
+                        train_loss1_c=np.array(train_loss_c)
+                        train_loss1_g=np.array(train_loss_g)
+                        np.save('./out/train_loss_d.npy',train_loss1_d)
+                        np.save('./out/train_loss_c.npy',train_loss1_c)
+                        np.save('./out/train_loss_a.npy',train_loss1_a)
+                        np.save('./out/train_loss_g.npy',train_loss1_g)
                 elif FLAGS.task == 'SRResnet':
                     print("global_step", results["global_step"])
                     print("PSNR", results["PSNR"])
                     print("content_loss", results["content_loss"])
                     print("learning_rate", results['learning_rate'])
+                    train_loss_c.append(results["content_loss"])
+                    
+                    if ((step +1) % FLAGS.save_freq_loss) == 0:
+                        print("save_loss_image")
+                        out_in=results["data_input"]
+                        out_out=results["data_output"]
+                        out_tar=results["data_targets"]
+                        out_pathway="./experiment/"+str(step)+"_gan_out.mat"
+                        scio.savemat(out_pathway, {"final_in":out_in,"final_out":out_out,"final_tar":out_tar})
+                        #train_loss1_d=np.array(train_loss_d)
+                        #train_loss1_a=np.array(train_loss_a)
+                        train_loss1_c=np.array(train_loss_c)
+                        #train_loss1_g=np.array(train_loss_g)
+                        #np.save('./out/train_loss_d.npy',train_loss1_d)
+                        np.save('./experiment/train_loss_c.npy',train_loss1_c)
+                        #np.save('./out/train_loss_a.npy',train_loss1_a)
+                        #np.save('./out/train_loss_g.npy',train_loss1_g)
+            
+            
 
             if ((step +1) % FLAGS.save_freq) == 0:
                 print('Save the checkpoint')

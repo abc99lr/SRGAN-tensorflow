@@ -209,12 +209,17 @@ def inference_data_loader(FLAGS):
         #     temp = np.empty((h, w, 3), dtype=np.uint8)
         #     temp[:, :, :] = im[:, :, np.newaxis]
         #     im = temp.copy()
-        im = im / np.max(im)
+        im = im / np.max(im)                        #############################################################################change!!!!!!!!!!!!!!!!!!
         im = np.reshape(im, (im.shape[0], im.shape[1], 1))
         
         return im
 
     image_LR = [preprocess_test(_) for _ in image_list_LR]
+    #image_array = np.array(image_LR)
+    #max_value=image_array.max
+    #image_LR=image_LR/max_value
+    
+    
 
     # Push path and image into a list
     Data = collections.namedtuple('Data', 'paths_LR, inputs')
@@ -296,7 +301,7 @@ def discriminator(dis_inputs, FLAGS=None):
 
         return net
 
-    with tf.device('/gpu:0'):
+    with tf.device('/cpu:0'):
         with tf.variable_scope('discriminator_unit'):
             # The input layer
             with tf.variable_scope('input_stage'):
